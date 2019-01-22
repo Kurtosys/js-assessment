@@ -16,7 +16,12 @@ exports.arraysAnswers = {
   },
 
   removeWithoutCopy: function(arr, item) {
-
+		for (let i = arr.length; i >= 0; i--) {
+			if (arr[i] === item) {
+				arr.splice(i, 1);
+			}
+		};
+		return arr;
   },
 
   append: function(arr, item) {
@@ -60,7 +65,13 @@ exports.arraysAnswers = {
   },
 
   duplicates: function(arr) {
-
+		const dups = [];
+		arr.sort().forEach((elem, idx) => {
+			if (idx !== 0 && elem === arr[idx - 1] && dups.indexOf(elem) <= 0) {
+				dups.push(elem);
+			}
+		});
+		return dups;
   },
 
   square: function(arr) {
@@ -68,6 +79,12 @@ exports.arraysAnswers = {
   },
 
   findAllOccurrences: function(arr, target) {
-
+		const idxs = [];
+		arr.forEach((elem, idx) => {
+			if (elem === target) {
+				idxs.push(idx);
+			}
+		});
+		return idxs;
   }
 };
