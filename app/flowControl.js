@@ -9,7 +9,9 @@ exports.flowControlAnswers = {
     // 'fizzbuzz';
     //
     // otherwise the function should return the number, or false if no number
-    // was provided or the value provided is not a number
-
+		// was provided or the value provided is not a number
+		const fizz = num % 3 === 0;
+		const buzz = num % 5 === 0;
+		return isNaN(num) ? false : fizz && buzz ? 'fizzbuzz' : fizz ? 'fizz' : buzz ? 'buzz' : num;
   }
 };

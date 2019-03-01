@@ -6,9 +6,13 @@ exports.arraysAnswers = {
   },
 
   sum: function(arr) {
-		let tot = 0;
-		arr.forEach(elem => tot = tot + elem);
-		return tot;
+		// let tot = 0;
+		// arr.forEach(elem => tot = tot + elem);
+		// return tot;
+
+		return arr.reduce((list, item) => {
+			return list += item;
+		}, 0);
   },
 
   remove: function(arr, item) {
