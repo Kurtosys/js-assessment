@@ -5,7 +5,9 @@ if ( typeof window === 'undefined' ) {
 
 describe('the module pattern', function() {
   it('you should be able to create a function that returns a module', function() {
-    var module = modulesAnswers.createModule('hello', 'matt');
+    const greeting = 'hello';
+    var module = modulesAnswers.createModule(greeting, 'matt');
+    expect(greeting).to.eq('hello');
 
     expect(module.sayIt).to.be.a('function');
     expect(module.name).to.eql('matt');

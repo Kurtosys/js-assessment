@@ -43,7 +43,7 @@ exports.functionsAnswers = {
     const args = [];
     const func = (arg) => {
       args.push(arg);
-      return (args.length < 3) ? func : fn(...args);
+      return (args.length < fn.length) ? func : fn(...args);
     };
     return func
   }

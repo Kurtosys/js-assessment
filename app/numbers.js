@@ -15,7 +15,7 @@ exports.numbersAnswers = {
   },
 
   convertToBinary: function(num) {
-    let bin = (num >>> 0).toString(2);
+    let bin = num.toString(2);
     const remainder = bin.length % 4;
     if (remainder > 0) {
       for (let i = 0; i < (4 - remainder); i++) {
