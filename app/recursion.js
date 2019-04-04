@@ -2,6 +2,38 @@ exports = typeof window === 'undefined' ? global : window;
 
 exports.recursionAnswers = {
   listFiles: function(data, dirName) {
+		const getFilesName = (data, outfiles) => {
+			const arr = data.files;
+			for (let i = 0; i < arr.length; i++) {
+				if (typeof arr[i] === 'string') {
+					outfiles.push(arr[i]);
+				}
+				else {
+					getFilesName(arr[i], outfiles);
+				}
+			}
+		}
+		const getDir = (data, dir) => {
+			if (data.dir === dir) {
+				return data;
+			}
+			else {
+				const arr = data.files;
+				let dirCheck = {};
+				for (let i = 0; i < arr.length; i++) {
+					if (typeof arr[i] !== 'string') {
+						dirCheck = getDir(arr[i], dir);
+						if (dirCheck) {
+							break;
+						}
+					}
+				}
+				if (dirCheck) {
+					return dirCheck;
+				}
+				return null;
+			}
+		}
 		const files = [];
 
 		if (dirName) {
@@ -18,10 +50,9 @@ exports.recursionAnswers = {
 		const startIdx = arr.length - 1;
 
 		const swapPos = (swapArr, i1, i2) => {
-			const newArr = swapArr.map((elem, idx, arr) => {
+			return swapArr.map((elem, idx, arr) => {
 				return idx === i1 ? arr[i2] : idx === i2 ? arr[i1] : elem;
 			});
-			return newArr
 		};
 
 		const getNext = (thisArr, idx) => {
@@ -44,50 +75,34 @@ exports.recursionAnswers = {
 
 		getNext(arr, startIdx);
 
-		outArr.sort();
-		outArr.map((elem) => console.log('outArr', elem));
+		// outArr.sort();
+		// outArr.map((elem) => console.log('outArr', elem));
+		// console.log(outArr.length);
+
 		return outArr;
   },
 
   fibonacci: function(n) {
+		const cache = {};
+		const getFib = (itr) => {
+			let res;
+			if (cache[itr]) {
+				return cache[itr];
+			}
+			if (itr < 2) {
+				res = itr === 0 ? itr : 1;
+			}
+			else {
+				res = getFib(itr - 2) + getFib(itr - 1);
+			}
+			cache[itr] = res;
+			return res;
+		};
 
+		return getFib(n);
   },
 
   validParentheses: function(n) {
 
   }
 };
-
-function getFilesName(data, outfiles) {
-	const arr = data.files;
-	for (let i = 0; i < arr.length; i++) {
-		if (typeof arr[i] === 'string') {
-			outfiles.push(arr[i]);
-		}
-		else {
-			getFilesName(arr[i], outfiles);
-		}
-	}
-}
-
-function getDir(data, dir) {
-	if (data.dir === dir) {
-		return data;
-	}
-	else {
-		const arr = data.files;
-		let dirCheck = {};
-		for (let i = 0; i < arr.length; i++) {
-			if (typeof arr[i] !== 'string') {
-				dirCheck = getDir(arr[i], dir);
-				if (dirCheck) {
-					break;
-				}
-			}
-		}
-		if (dirCheck) {
-			return dirCheck;
-		}
-		return null;
-	}
-}
