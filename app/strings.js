@@ -39,9 +39,9 @@ exports.stringsAnswers = {
 		let last = false;
 		do {
 			const spaceBeforeCols = findSpace(str, cols, true);
-			const spaceAfterCols = charsLeft >= cols ? findSpace(str, cols) : null;
-
+			const spaceAfterCols = charsLeft > cols ? findSpace(str, cols) : null;
 			let breakIdx;
+
 			if (charsLeft <= cols) {
 				last = true;
 			}
@@ -59,7 +59,7 @@ exports.stringsAnswers = {
 				charsLeft = str.length;
 			}
 		} while (charsLeft > 0);
-		
+
 		return out;
   },
 
