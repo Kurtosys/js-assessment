@@ -103,6 +103,26 @@ exports.recursionAnswers = {
   },
 
   validParentheses: function(n) {
+		const brackets = [];
+    const buildBrackets = (openParentheses, closeParentheses, str) => {
 
+      console.log({openParentheses, closeParentheses, str});
+
+      // when all parentheses are closed, add to array
+      if (openParentheses == 0 && closeParentheses == 0) {
+        brackets.push(str);
+      }
+      // when there are still open parentheses, recall method and decrement open, increment close parentheses
+      if (openParentheses > 0) {
+        buildBrackets(openParentheses - 1, closeParentheses + 1, `${str}(`);
+      }
+      // continue to close unclosed parentheses
+      if (closeParentheses > 0) {
+        buildBrackets(openParentheses, closeParentheses - 1, `${str})`);
+      }
+		}
+		
+    buildBrackets(n, 0, "");
+    return brackets;
   }
 };
